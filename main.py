@@ -6,16 +6,27 @@ import datetime
 from PyQt6 import QtWidgets, uic, QtCore
 from PyQt6.QtGui import QIcon, QPixmap, QFont
 import psycopg  # psycopg3, pip install psycopg[binary]
-
+import configparser
+from pathlib import Path
 
 # ---------- НАСТРОЙКИ БАЗЫ ДАННЫХ ----------
+
 def get_connection():
+    config = configparser.ConfigParser()
+
+    config_path = Path(__file__).resolve().parent / "config.ini"
+
+    if not config.read(config_path, encoding="utf-8"):
+        raise FileNotFoundError("Файл config.ini не найден")
+
+    db = config["database"]
+
     return psycopg.connect(
-        dbname="ooobuv",
-        user="postgres",
-        password="123456",
-        host="localhost",
-        port=5432,
+        dbname=db["name"],
+        user=db["user"],
+        password=db["password"],
+        host=db["host"],
+        port=db.getint("port")
     )
 
 
