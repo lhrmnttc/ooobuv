@@ -136,7 +136,7 @@ class ProductsWindow(QtWidgets.QWidget):
         uic.loadUi("ui/spisokTovarov.ui", self)
         self.setFixedSize(self.size())
         self.setWindowIcon(QIcon("pics/icon.ico"))
-        self.setWindowTitle("Список товаров")
+        self.setWindowTitle("Товары")
 
         self.current_user = current_user
 
