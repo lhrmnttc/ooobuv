@@ -455,8 +455,11 @@ class ProductsWindow(QtWidgets.QWidget):
         info_layout.addWidget(price_row)
 
         info_layout.addWidget(make_row("Единица измерения:", uom or "-"))
+
+        stock_text = "Много в наличии" if amount > 5 else "Мало в наличии"
+
         info_layout.addWidget(
-            make_row("Количество на складе:", str(amount), highlight=(amount <= 0))
+            make_row("Количество на складе:", stock_text, highlight=(amount <= 0))
         )
 
         # КНОПКИ УДАЛЕНИЯ НА КАРТОЧКЕ БОЛЬШЕ НЕТ
