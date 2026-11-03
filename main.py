@@ -114,6 +114,17 @@ class AuthorizeWindow(QtWidgets.QMainWindow):
         # обращаемся к БД с обработкой ошибок
         try:
             user = get_user_by_credentials(login, password)
+        except psycopg.OperationalError:
+            QtWidgets.QMessageBox.critical(
+                self,
+                "Ошибка подключения к БД",
+                "Не удалось подключиться к базе данных.\n\n"
+                "Проверьте:\n"
+                "1. Запущен ли сервер PostgreSQL.\n"
+                "2. Правильность настроек в config.ini.\n"
+                "3. Доступность базы данных ООО «Обувь»."
+            )
+            return
         except Exception as e:
             QtWidgets.QMessageBox.critical(
                 self,
