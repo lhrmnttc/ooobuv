@@ -458,7 +458,7 @@ class ProductsWindow(QtWidgets.QWidget):
 
         MANY_THRESHOLD = 5
 
-        stock_text = "Много" if amount > MANY_THRESHOLD else "Мало"
+        stock_text = "Много в наличии" if amount > MANY_THRESHOLD else "Мало в наличии"
 
         info_layout.addWidget(
             make_row("Количество на складе:", stock_text, highlight=(amount <= 0))
