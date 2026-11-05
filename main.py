@@ -121,7 +121,7 @@ class AuthorizeWindow(QtWidgets.QMainWindow):
                 "Не удалось подключиться к базе данных.\n\n"
                 "Проверьте:\n"
                 "1. Запущен ли сервер PostgreSQL.\n"
-                "2. Правильность настроек в config.ini.\n"
+                "2. Находится ли config.ini в той же папке с main.py.\n"
                 "3. Доступность базы данных ООО «Обувь»."
             )
             return
