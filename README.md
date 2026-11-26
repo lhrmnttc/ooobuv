@@ -51,5 +51,57 @@ ER-диаграмма включает в себя следующие табли
 - `product` — Номер товара, наименование, цена, поставщик, продавец, категория, размер, скидка, описание, ссылка на изображение.
 - `pvz` — Информация о пунктах выдачи заказов: номер и адрес
 
+
+## Запуск PostgreSQL через Docker Compose
+
+### Требования
+
+- Docker Desktop с поддержкой Linux-контейнеров
+- Docker Compose v2
+- Python 3.10
+- PyQt6
+
+### Запуск
+
+1. Скопировать файл .env.example в .env и указать локальный пароль.
+2. Собрать и запустить контейнеры:
+
+   docker compose up --build -d
+
+3. Импортировать базу данных:
+
+   docker compose cp database/shoe_store.sql db:/tmp/shoe_store.sql
+
+   docker compose exec db psql -v ON_ERROR_STOP=1 -U postgres -d ooobuv -f /tmp/shoe_store.sql
+
+4. Проверить подключение:
+
+   docker compose run --rm db-check
+
+5. Настроить config.ini:
+   - host: 127.0.0.1
+   - port: 5433
+   - name: ooobuv
+   - user: postgres
+   - password: локальный пароль из .env
+
+6. Запустить приложение:
+
+   python main.py
+
+### Остановка контейнеров
+
+docker compose stop
+
+### Повторный запуск
+
+docker compose start
+
+Сервис db-check выполняет проверку подключения к PostgreSQL
+и выводит количество таблиц в базе данных.
+После успешного выполнения сервис завершает работу с кодом 0.
+
+Файлы .env и config.ini не публикуются в репозитории.
+
 ## Автор 
 Дрябина Татьяна, ПКС-42
