@@ -26,7 +26,8 @@ def get_connection():
         user=db["user"],
         password=db["password"],
         host=db["host"],
-        port=db.getint("port")
+        port=db.getint("port"),
+        connect_timeout=5
     )
 
 
